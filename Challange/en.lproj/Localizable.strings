@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  Challange
+
+  Created by Okan Yücel on 26.11.2018.
+  Copyright © 2018 Okan Yücel. All rights reserved.
+*/
+
+
+"id_yarismaBaslamakUzere" = "The competition will start in a few seconds!";
+"id_yarismaBasladi" = "The competition has started!";
+"id_merhaba" = "Hello";
+"id_soru" = "Question";
+"id_cevaplar" = "Answers";
+
+
+"id_tiklaTekrarDene" = "Click to try Again!";
+"id_hata" = "ERROR";
+"id_internetKontrol" = "Please make sure you have an internet connection.";
+"id_dahaSonraDene" = "Please try again later";
+"id_tamam" = "OK";
+"id_iptal" = "Cancel";
+
+//let text = NSLocalizedString("id_yarismaBaslamakUzere", comment: "")

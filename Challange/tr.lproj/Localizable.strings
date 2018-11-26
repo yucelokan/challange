@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Challange
+
+  Created by Okan Yücel on 26.11.2018.
+  Copyright © 2018 Okan Yücel. All rights reserved.
+*/
+
+"id_yarismaBaslamakUzere" = "Yarışma birkaç saniye içerisinde başlayacak!";
+"id_yarismaBasladi" = "Yarışma başladı!";
+"id_merhaba" = "Merhaba";
+"id_soru" = "Soru";
+"id_cevaplar" = "Cevaplar";
+
+"id_tiklaTekrarDene" = "Tekrar denemek için tıkla!";
+"id_hata" = "HATA";
+"id_internetKontrol" = "Lütfen internet bağlantınızın olduğundan emin olun.";
+"id_dahaSonraDene" = "Lütfen daha sonra tekrar deneyin";
+"id_tamam" = "Tamam";
+"id_iptal" = "İptal";
+//let text = NSLocalizedString("id_yarismaBaslamakUzere", comment: "")

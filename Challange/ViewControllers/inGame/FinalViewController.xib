@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinalViewController" customModule="Challange" customModuleProvider="target">
+            <connections>
+                <outlet property="mLabelFirst" destination="xAP-dX-qPx" id="nUY-c0-WFB"/>
+                <outlet property="mLabelSecond" destination="xP7-WN-hCN" id="lui-Vq-Lhu"/>
+                <outlet property="mTableView" destination="CYB-Km-7s1" id="4PQ-fo-E1g"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winners get" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAP-dX-qPx">
+                    <rect key="frame" x="126" y="50" width="123" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bütün soruları doğru yapanlar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP7-WN-hCN">
+                    <rect key="frame" x="69" y="100" width="237.5" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CYB-Km-7s1">
+                    <rect key="frame" x="0.0" y="141" width="375" height="526"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="p5U-M7-YEy"/>
+                        <outlet property="delegate" destination="-1" id="SJG-4e-wQi"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CYB-Km-7s1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8KJ-Pv-xj5"/>
+                <constraint firstItem="xP7-WN-hCN" firstAttribute="top" secondItem="xAP-dX-qPx" secondAttribute="bottom" constant="26" id="AYj-G2-EW0"/>
+                <constraint firstItem="CYB-Km-7s1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Cyz-wh-c7C"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xAP-dX-qPx" secondAttribute="trailing" constant="10" id="DG1-vo-ZUb"/>
+                <constraint firstItem="xAP-dX-qPx" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="OaE-Q8-GDg"/>
+                <constraint firstItem="xAP-dX-qPx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Sdi-U5-qOL"/>
+                <constraint firstItem="xP7-WN-hCN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="ZJM-ev-4nk"/>
+                <constraint firstItem="xAP-dX-qPx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="fGF-Sq-Md4"/>
+                <constraint firstItem="CYB-Km-7s1" firstAttribute="top" secondItem="xP7-WN-hCN" secondAttribute="bottom" constant="19.5" id="hw0-eT-hew"/>
+                <constraint firstItem="xP7-WN-hCN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="mEf-jt-svK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xP7-WN-hCN" secondAttribute="trailing" constant="10" id="oHY-rp-oeU"/>
+                <constraint firstItem="CYB-Km-7s1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tZa-bh-aOc"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="140" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>
