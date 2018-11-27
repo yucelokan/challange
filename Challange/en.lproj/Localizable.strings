@@ -13,6 +13,7 @@
 "id_soru" = "Question";
 "id_dogru" = "TRUE";
 "id_yanlis" = "FALSE";
+"id_yarismaBitti" = "The competition is over!";
 "id_cevaplar" = "Answers";
 "id_wildCard" = "You've already used the Wild-Card!";
 "id_hurryUp" = "HURRY UP! Use the wild-card to continue the competition!";

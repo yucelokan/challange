@@ -61,8 +61,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJG-1D-Ieo">
-                        <rect key="frame" x="154.5" y="9" width="11" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJG-1D-Ieo">
+                        <rect key="frame" x="147.5" y="9" width="25.5" height="24"/>
                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

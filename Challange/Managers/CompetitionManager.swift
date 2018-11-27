@@ -34,15 +34,15 @@ class CompetitionManager: NSObject {
             cell.mLabelAnswer.textColor = UIColor.black
             break
         case .waiting:
-            cell.mViewBack.backgroundColor = UIColor.orange
+            cell.mViewBack.backgroundColor = UIColor.init(hexString: "ffc04c")!
             cell.mLabelAnswer.textColor = UIColor.black
             break
         case .falsee:
-            cell.mViewBack.backgroundColor = UIColor.red
+            cell.mViewBack.backgroundColor = UIColor.init(hexString: "ff3232")!
             cell.mLabelAnswer.textColor = UIColor.white
             break
         case .truee:
-            cell.mViewBack.backgroundColor = UIColor.green
+            cell.mViewBack.backgroundColor = UIColor.init(hexString: "4CB74C")!
             cell.mLabelAnswer.textColor = UIColor.black
             break
         }

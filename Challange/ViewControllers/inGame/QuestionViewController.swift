@@ -167,9 +167,15 @@ extension QuestionViewController{
     }
 
     func askUserWildCard(){
-        guard let cardNum = self.mUserInformation?.wildCardCount, cardNum > 0 else{
+        guard let cardNum = self.mUserInformation?.wildCardCount, cardNum > 0, let soruSira = self.mQuestion?.soruSira, let toplamSoru = self.mQuestion?.toplamSoru else{
             return
         }
+        
+        guard soruSira < toplamSoru else{
+            self.finishCompetition()
+            return
+        }
+        
         
         let title = "10"
         let message = NSLocalizedString("id_hurryUp", comment: "")
@@ -221,10 +227,15 @@ extension QuestionViewController{
     
     func finishCompetition(){
         self.timer.invalidate()
-        let final = FinalViewController()
-        self.dismiss(animated: false, completion: nil)
-        mAppDelegate.mMainViewController?.present(final, animated: true, completion: nil)
         
+        let messageToast = NSLocalizedString("id_yarismaBitti", comment: "")
+        AlertManager.instance.showNegativeMessage(message: messageToast, time: 3, controller: self)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let final = FinalViewController()
+            self.dismiss(animated: false, completion: nil)
+            mAppDelegate.mMainViewController?.present(final, animated: true, completion: nil)
+        }
     }
     
     

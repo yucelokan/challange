@@ -12,6 +12,7 @@
 "id_soru" = "Soru";
 "id_dogru" = "DOĞRU";
 "id_yanlis" = "YANLIŞ";
+"id_yarismaBitti" = "Yarışma bitti!";
 "id_cevaplar" = "Cevaplar";
 "id_wildCard" = "Wild-Card hakkınızı zaten kullandınız!";
 "id_hurryUp" = "ACELE ET! Yarışmaya devam edebilmek için wild card kullan!";
@@ -35,4 +36,4 @@
 "id_tamam" = "Tamam";
 "id_iptal" = "İptal";
 "id_evet" = "Evet";
-//let text = NSLocalizedString("id_correctAllUsers", comment: "")
+//let text = NSLocalizedString("id_yarismaBitti", comment: "")
