@@ -21,6 +21,7 @@ class FinalViewController: UIViewController {
     @IBOutlet weak var mLabelSecond: UILabel!
     @IBOutlet weak var mLabelFirst: UILabel!
     @IBOutlet weak var mTableView: UITableView!
+    @IBOutlet weak var mButtonDismiss: UIButton!
     
     var mFinalResults:Results?
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class FinalViewController: UIViewController {
         self.mTableView.register(FinalTableViewCell.classForCoder(), forCellReuseIdentifier: "FinalTableViewCell")
         self.mTableView.register(UINib.init(nibName: "FinalTableViewCell", bundle: nil), forCellReuseIdentifier: "FinalTableViewCell")
 
+        self.setLocalizableStrings()
         
         self.loadFinalResults()
         // Do any additional setup after loading the view.
@@ -37,13 +39,26 @@ class FinalViewController: UIViewController {
     func loadFinalResults(){
         RequestManager.instance.getResults { (status, result) in
             if status{
-                self.mLabelFirst.text = "Kazandığınız para\n\n\(result.kazanilanPara ?? "0")"
+                
+                let text = NSLocalizedString("id_earnedMoney", comment: "")
+                
+                self.mLabelFirst.text = "\(text)\n\n\(result.kazanilanPara ?? "0")"
                 self.mFinalResults = result
                 self.mTableView.reloadData()
             }
         }
     }
-
+    
+    func setLocalizableStrings(){
+        self.mLabelSecond.text = NSLocalizedString("id_correctAllUsers", comment: "")
+        self.mLabelFirst.text = NSLocalizedString("id_earnedMoney", comment: "")
+        self.mButtonDismiss.setTitle(NSLocalizedString("id_tamam", comment: ""), for: .normal)
+    }
+    
+    @IBAction func dismissButtonTouch(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension FinalViewController: UITableViewDelegate, UITableViewDataSource{

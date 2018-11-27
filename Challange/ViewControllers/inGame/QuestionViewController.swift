@@ -128,7 +128,7 @@ extension QuestionViewController{
                     self.getNextQuestion()
                     
                     if let topVC = HelperManager.topViewController(){
-                        let message = "Wild-Card hakkınızı zaten kullandınız!"
+                        let message = NSLocalizedString("id_wildCard", comment: "")
                          AlertManager.instance.showNegativeMessage(message: message, time: 2, controller: topVC)
                     }
 
@@ -150,7 +150,17 @@ extension QuestionViewController{
             return
         }
         
-        self.selectedAnswer = cell.mLabelAnswer.text
+        guard let ans = cell.mLabelAnswer.text else{
+            return
+        }
+        self.selectedAnswer = ans
+        
+        RequestManager.instance.sendAnswer(answer: ans) { (status, result) in
+            if status{
+                //"cevap gönderildi"
+            }
+        }
+        
         CompetitionManager.instance.setAnswerBackground(type: .waiting, cell: cell)
         self.userStatus = .waitingForAnswers
 
@@ -162,8 +172,8 @@ extension QuestionViewController{
         }
         
         let title = "10"
-        let message = "ACELE ET! Yarışmaya devam edebilmek için wild card kullan!"
-        let buttonString = "KULLAN"
+        let message = NSLocalizedString("id_hurryUp", comment: "")
+        let buttonString = NSLocalizedString("id_use", comment: "")
         
         var count = 10
         
@@ -172,20 +182,31 @@ extension QuestionViewController{
             self.alreadyUseWildCard = true
             self.userStatus = .waitingForNewQuestion
             self.mUserInformation?.wildCardCount = (self.mUserInformation?.wildCardCount ?? 0) - 1
-            let messageToast = "Kart kullanıldı."
+            
+            RequestManager.instance.useWildCard(completionHandler: { (status, result) in
+                if status{
+                    //"Kart kullanıldı.
+                }
+            })
+            
+            let messageToast = NSLocalizedString("id_wcUsed", comment: "")
             AlertManager.instance.showPositiveMessage(message: messageToast, time: 3, controller: self)
     
         }
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
             
+            if let cell = self.mTableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as? QuestionTableViewCell{
+                cell.mLabelTime.text = "\(count)"
+            }
+
             AlertManager.instance.changeAlertText(title: true, newText: "\(count)")
             count -= 1
             
             if count == -1{
                 if self.userStatus == .waitingForWildCard{
                     self.userStatus = .isViewer
-                    let messageToast = "İzleyici olarak devam edilecek!"
+                    let messageToast = NSLocalizedString("id_asAviewer", comment: "")
                     AlertManager.instance.showNegativeMessage(message: messageToast, time: 3, controller: self)
                 }
                 
@@ -199,8 +220,11 @@ extension QuestionViewController{
     }
     
     func finishCompetition(){
+        self.timer.invalidate()
         let final = FinalViewController()
-        present(final, animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
+        mAppDelegate.mMainViewController?.present(final, animated: true, completion: nil)
+        
     }
     
     
@@ -257,31 +281,27 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource{
         switch self.userStatus {
         case .isViewer:
             
-            let title = "İzleyicisiniz!"
-            let message = "Sorulara cevap veremezsiniz. Yarışmadan çıkmak ister misiniz?"
-            let buttonString = "Evet"
+            let title = NSLocalizedString("id_youViewer", comment: "")
+            let message = NSLocalizedString("id_wouldYouLeave", comment: "")
+            let buttonString = NSLocalizedString("id_evet", comment: "")
             AlertManager.instance.showAlert(title: title, message: message, type: .alert, buttonString: buttonString, showCancel: true) {
                 self.dismiss(animated: false, completion: nil)
             }
             
             break
         case .waitingForNewQuestion:
-            
-            let title = "Yeni soru için bekleniyor"
-            let message = "Lütfen yeni sorunun gelmesini bekleyin."
-            let buttonString = "Tamam"
-            AlertManager.instance.showAlert(title: title, message: message, type: .alert, buttonString: buttonString, showCancel: false) { }
+    
+            let messageToast = NSLocalizedString("id_pleaseWaitForNewQuestion", comment: "")
+            AlertManager.instance.showNegativeMessage(message: messageToast, time: 3, controller: self)
             
             break
         case .waitingForWildCard:
             break
         case .waitingForAnswers:
             
-            let title = "Daha süre var!"
-            let message = "Lütfen sürenin bitmesini bekleyin."
-            let buttonString = "Tamam"
-            AlertManager.instance.showAlert(title: title, message: message, type: .alert, buttonString: buttonString, showCancel: false) { }
-            
+            let messageToast = NSLocalizedString("id_waitForTime", comment: "")
+            AlertManager.instance.showNegativeMessage(message: messageToast, time: 3, controller: self)
+
             break
         case .player:
             self.setAnswer(tableView: tableView, cell: cell, indexPath: indexPath)

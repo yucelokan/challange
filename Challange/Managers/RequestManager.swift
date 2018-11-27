@@ -129,6 +129,79 @@ class RequestManager: NSObject {
         }
     }
     
+    func sendAnswer(answer: String, completionHandler: @escaping (_ status:Bool,_ result: Answer) -> ()) {
+        
+        var status = false
+        var result = Answer()
+        
+        let serviceURL = RestApiURLManager.mSendAnswerURL
+        
+        let parameters: [String: AnyObject]? = [
+            "id": "id" as AnyObject,
+            "cevap": answer as AnyObject
+        ]
+        
+        AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseObject { (response: DataResponse<Answer>) in
+                
+                status = response.result.isSuccess
+                
+                if status{
+                    if let value = response.result.value{
+                        status = value.status
+                        if status{
+                            result = value
+                        }else{
+                            AlamofireManager.handleError(errorCode: 0 , errorMessage: nil)
+                        }
+                    }else{
+                        status = false
+                        AlamofireManager.handleError(errorCode: 0 , errorMessage: nil)
+                    }
+                }else{
+                    AlamofireManager.handleError(error: response.result.error as NSError?)
+                }
+                completionHandler(status,result)
+                
+        }
+    }
+    
+    func useWildCard(completionHandler: @escaping (_ status:Bool,_ result: WildCard) -> ()) {
+        
+        var status = false
+        var result = WildCard()
+        
+        let serviceURL = RestApiURLManager.mUseWildCardURL
+        
+        let parameters: [String: AnyObject]? = [
+            "id": "id" as AnyObject
+        ]
+        
+        AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseObject { (response: DataResponse<WildCard>) in
+                
+                status = response.result.isSuccess
+                
+                if status{
+                    if let value = response.result.value{
+                        status = value.status
+                        if status{
+                            result = value
+                        }else{
+                            AlamofireManager.handleError(errorCode: 0 , errorMessage: nil)
+                        }
+                    }else{
+                        status = false
+                        AlamofireManager.handleError(errorCode: 0 , errorMessage: nil)
+                    }
+                }else{
+                    AlamofireManager.handleError(error: response.result.error as NSError?)
+                }
+                completionHandler(status,result)
+                
+        }
+    }
+    
     
     
     

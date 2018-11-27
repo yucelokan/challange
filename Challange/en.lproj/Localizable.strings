@@ -8,11 +8,26 @@
 
 
 "id_yarismaBaslamakUzere" = "The competition will start in a few seconds!";
-"id_yarismaBasladi" = "The competition has started!";
+"id_yarismaBasladi" = "Start again";
 "id_merhaba" = "Hello";
 "id_soru" = "Question";
+"id_dogru" = "TRUE";
+"id_yanlis" = "FALSE";
 "id_cevaplar" = "Answers";
+"id_wildCard" = "You've already used the Wild-Card!";
+"id_hurryUp" = "HURRY UP! Use the wild-card to continue the competition!";
+"id_use" = "USE";
+"id_wcUsed" = "Wild-card was used.";
+"id_asAviewer" = "You will be continued as the viewer!";
 
+"id_youViewer" = "You are viewer!";
+"id_wouldYouLeave" = "You cannot answer questions. Would you like to leave the competition?";
+"id_waitNewQuestion" = "Waiting for new question.";
+"id_pleaseWaitForNewQuestion" = "Please wait for the new question.";
+"id_thereIsTime" = "There is more time!";
+"id_waitForTime" = "Please wait for the time to end.";
+"id_correctAllUsers" = "People who answered all questions correctly:";
+"id_earnedMoney" = "Earned money";
 
 "id_tiklaTekrarDene" = "Click to try Again!";
 "id_hata" = "ERROR";
@@ -20,5 +35,6 @@
 "id_dahaSonraDene" = "Please try again later";
 "id_tamam" = "OK";
 "id_iptal" = "Cancel";
+"id_evet" = "Yes";
 
 //let text = NSLocalizedString("id_yarismaBaslamakUzere", comment: "")

@@ -16,12 +16,13 @@ class MainViewController: UIViewController {
     var counter = 5
     var timer = Timer()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setLocalizableStrings()
         
-        self.getUserInformation()
+       self.getUserInformation()
         
     }
     
@@ -47,6 +48,9 @@ class MainViewController: UIViewController {
             if status{
                 self.mLabelFirst.isUserInteractionEnabled = false
                 self.mLabelFirst.text = NSLocalizedString("id_yarismaBasladi", comment: "")
+                let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.tryAgain))
+                self.mLabelFirst.isUserInteractionEnabled = true
+                self.mLabelFirst.addGestureRecognizer(tap)
                 self.startCompetition(question: result)
             }else{
                  self.mLabelFirst.text = NSLocalizedString("id_tiklaTekrarDene", comment: "")

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinalViewController" customModule="Challange" customModuleProvider="target">
             <connections>
+                <outlet property="mButtonDismiss" destination="EDy-cC-TA6" id="erd-fo-cO9"/>
                 <outlet property="mLabelFirst" destination="xAP-dX-qPx" id="nUY-c0-WFB"/>
                 <outlet property="mLabelSecond" destination="xP7-WN-hCN" id="lui-Vq-Lhu"/>
                 <outlet property="mTableView" destination="CYB-Km-7s1" id="4PQ-fo-E1g"/>
@@ -36,27 +37,39 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CYB-Km-7s1">
-                    <rect key="frame" x="0.0" y="141" width="375" height="526"/>
+                    <rect key="frame" x="0.0" y="141" width="375" height="476"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="p5U-M7-YEy"/>
                         <outlet property="delegate" destination="-1" id="SJG-4e-wQi"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EDy-cC-TA6">
+                    <rect key="frame" x="158.5" y="625" width="58" height="32"/>
+                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="16"/>
+                    <state key="normal" title="Tamam"/>
+                    <connections>
+                        <action selector="dismissButtonTouch:" destination="-1" eventType="touchUpInside" id="fqR-vK-5u4"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="CYB-Km-7s1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8KJ-Pv-xj5"/>
                 <constraint firstItem="xP7-WN-hCN" firstAttribute="top" secondItem="xAP-dX-qPx" secondAttribute="bottom" constant="26" id="AYj-G2-EW0"/>
-                <constraint firstItem="CYB-Km-7s1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Cyz-wh-c7C"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xAP-dX-qPx" secondAttribute="trailing" constant="10" id="DG1-vo-ZUb"/>
                 <constraint firstItem="xAP-dX-qPx" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="OaE-Q8-GDg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="EDy-cC-TA6" secondAttribute="bottom" constant="10" id="RYK-fz-ng7"/>
                 <constraint firstItem="xAP-dX-qPx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Sdi-U5-qOL"/>
                 <constraint firstItem="xP7-WN-hCN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="ZJM-ev-4nk"/>
+                <constraint firstItem="EDy-cC-TA6" firstAttribute="top" secondItem="CYB-Km-7s1" secondAttribute="bottom" constant="8" id="cDh-WI-R89"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EDy-cC-TA6" secondAttribute="trailing" constant="10" id="da7-Y4-hZy"/>
                 <constraint firstItem="xAP-dX-qPx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="fGF-Sq-Md4"/>
                 <constraint firstItem="CYB-Km-7s1" firstAttribute="top" secondItem="xP7-WN-hCN" secondAttribute="bottom" constant="19.5" id="hw0-eT-hew"/>
+                <constraint firstItem="EDy-cC-TA6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="j7Y-u8-kIR"/>
                 <constraint firstItem="xP7-WN-hCN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="mEf-jt-svK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xP7-WN-hCN" secondAttribute="trailing" constant="10" id="oHY-rp-oeU"/>
+                <constraint firstItem="EDy-cC-TA6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="obs-HE-0mb"/>
                 <constraint firstItem="CYB-Km-7s1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tZa-bh-aOc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

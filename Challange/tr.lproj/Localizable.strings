@@ -7,10 +7,26 @@
 */
 
 "id_yarismaBaslamakUzere" = "Yarışma birkaç saniye içerisinde başlayacak!";
-"id_yarismaBasladi" = "Yarışma başladı!";
+"id_yarismaBasladi" = "Tekrar başlat!";
 "id_merhaba" = "Merhaba";
 "id_soru" = "Soru";
+"id_dogru" = "DOĞRU";
+"id_yanlis" = "YANLIŞ";
 "id_cevaplar" = "Cevaplar";
+"id_wildCard" = "Wild-Card hakkınızı zaten kullandınız!";
+"id_hurryUp" = "ACELE ET! Yarışmaya devam edebilmek için wild card kullan!";
+"id_use" = "KULLAN";
+"id_wcUsed" = "Wild-card kullanıldı.";
+"id_asAviewer" = "İzleyici olarak devam edilecek.";
+
+"id_youViewer" = "İzleyicisiniz!";
+"id_wouldYouLeave" = "Sorulara cevap veremezsiniz. Yarışmadan çıkmak ister misiniz?";
+"id_waitNewQuestion" = "Yeni soru için bekleniyor.";
+"id_pleaseWaitForNewQuestion" = "Lütfen yeni sorunun gelmesini bekleyin.";
+"id_thereIsTime" = "Daha süre var!";
+"id_waitForTime" = "Lütfen sürenin bitmesini bekleyin.";
+"id_correctAllUsers" = "Tüm soruları doğru cevaplayan kişiler:";
+"id_earnedMoney" = "Kazanılan para";
 
 "id_tiklaTekrarDene" = "Tekrar denemek için tıkla!";
 "id_hata" = "HATA";
@@ -18,4 +34,5 @@
 "id_dahaSonraDene" = "Lütfen daha sonra tekrar deneyin";
 "id_tamam" = "Tamam";
 "id_iptal" = "İptal";
-//let text = NSLocalizedString("id_yarismaBaslamakUzere", comment: "")
+"id_evet" = "Evet";
+//let text = NSLocalizedString("id_correctAllUsers", comment: "")

@@ -65,14 +65,14 @@ class CompetitionManager: NSObject {
                     self.setAnswerBackground(type: .truee, cell: cell)
                     answer = true
                     if let topVC = HelperManager.topViewController() {
-                        let message = "Doğru"
+                        let message = NSLocalizedString("id_dogru", comment: "")
                         AlertManager.instance.showPositiveMessage(message: message, time: 2, controller: topVC)
                     }
                 }else if selectedAnswer != correctAnswer && cellText == selectedAnswer {
                     self.setAnswerBackground(type: .falsee, cell: cell)
                     answer = false
                     if let topVC = HelperManager.topViewController() {
-                        let message = "Yanlış"
+                        let message = NSLocalizedString("id_yanlis", comment: "")
                         AlertManager.instance.showNegativeMessage(message: message, time: 2, controller: topVC)
                     }
                 }else if cellText == correctAnswer{
