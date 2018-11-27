@@ -21,20 +21,25 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         self.setLocalizableStrings()
-        
-       self.getUserInformation()
+        //
+        self.getUserInformation()
         
     }
     
     func getUserInformation(){
+        //ilk açılışta üye bilgilerini almak için istek atılıyor.
+        //fonksiyon içerisinde servisin çalışma şekli yazıyor.
         RequestManager.instance.getUserInformations { (status, result) in
             if status{
                 self.userInformation = result
                 self.setLocalizableStrings()
+                // servisten veri geldikten sonra sanki dinlenilen bir soket server varmış gibi düşünülüp
+                //5 saniye sonra ilk soru soket serverdan gelmiş gibi davranılarak soru alınıyor ve yarışma başlatıylıyor
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.startCountDown), userInfo: nil, repeats: true)
                 }
             }else{
+                // servisten cevap gelmeme durumunda tekrar denemek için tıklanabilir
                 self.mLabelFirst.text = NSLocalizedString("id_tiklaTekrarDene", comment: "")
                 let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.tryAgain))
                 self.mLabelFirst.isUserInteractionEnabled = true
@@ -44,6 +49,7 @@ class MainViewController: UIViewController {
     }
     
     func getFirstQuestion(){
+        // ilk soru isteniyor. fonskyion içinde servisin nasıl çalıştığı anlatılıyor.
         RequestManager.instance.getQuestion(questionNumber: 1) { (status, result) in
             if status{
                 self.mLabelFirst.isUserInteractionEnabled = false
@@ -51,8 +57,11 @@ class MainViewController: UIViewController {
                 let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.tryAgain))
                 self.mLabelFirst.isUserInteractionEnabled = true
                 self.mLabelFirst.addGestureRecognizer(tap)
+                
+                // ilk soru gelince yarışma başlıyor.
                 self.startCompetition(question: result)
             }else{
+                // servisten cevap gelmeme durumunda tekrar denemek için tıklanabilir
                  self.mLabelFirst.text = NSLocalizedString("id_tiklaTekrarDene", comment: "")
                 let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.tryAgain))
                 self.mLabelFirst.isUserInteractionEnabled = true
@@ -80,6 +89,8 @@ class MainViewController: UIViewController {
             return
         }
         
+        // yarışma başlamadan önceki geri sayım.
+        
         let hello = NSLocalizedString("id_merhaba", comment: "")
         let text = "\(hello), \(name),\n Wild-Card : \(wildCardCount)\n\n\(self.counter)"
         
@@ -89,6 +100,7 @@ class MainViewController: UIViewController {
         if counter == -1{
             self.counter = 5
             self.timer.invalidate()
+            // süre bitince ilk soru isteniyor ve ilk soru gelince yarışma başlıyor.
             self.getFirstQuestion()
         }
         

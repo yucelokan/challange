@@ -11,10 +11,16 @@ import UIKit
 protocol isEverythingOkayDelegate{
     func isEverythingOkay(isOkay: Bool)
 }
+//yukarıdaki func TableView cell lerini set ederken kullanılan protocol
+// eğer cell leri set ederken herhangi bir problem çıkarsa çalışıyor ve false a dönüyor
+// eğer bu değer false ise soru cevaplanamaz.
 
 public enum statusOfUser{
     case player, isViewer, waitingForWildCard, waitingForNewQuestion, waitingForAnswers
 }
+// yarışma sırasında kullanıcının geçtiği durumlar bu durumlara göre kullanıcının davranışları değiştiriliyor
+// örneğin: isviewer ise soru cevaplayamaz, waitiginForAnswers ise soru cevaplanmış ve bekleniyor cevap veremez gibi durumları yönetmek için oluşturlmuştur.
+
 
 class QuestionViewController: UIViewController, isEverythingOkayDelegate{
     
@@ -33,6 +39,9 @@ class QuestionViewController: UIViewController, isEverythingOkayDelegate{
     func isEverythingOkay(isOkay: Bool) {
         self.isEverythingOkay = isOkay
     }
+    //yukarıdaki func TableView cell lerini set ederken kullanılan protocol
+    // eğer cell leri set ederken herhangi bir problem çıkarsa çalışıyor ve false a dönüyor
+    // eğer bu değer false ise soru cevaplanamaz.
     
     
     @IBOutlet weak var mTableView: UITableView!
@@ -73,14 +82,17 @@ extension QuestionViewController{
         guard let _ = self.mQuestion?.soruSira, let toplam = self.mQuestion?.toplamSoru else{
             return
         }
-        
+        //sıradaki soruyu almak için oluşturulan istek 10 saniyede 1 çalışıyor sanki soket server dinleniyormuş gibi
         guard questionNum <= toplam else{
+            // eğer son soruysa yarışmayı bitir
           self.finishCompetition()
             return
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // önceden cevaplanmış soru varsa arkaplanı beyaz yap
             CompetitionManager.instance.setAllDefaultBackground(tableView: self.mTableView)
+            //soruyu al
             self.getQuestion(questionNumParameter: self.questionNum)
         }
         
@@ -89,12 +101,14 @@ extension QuestionViewController{
     func getQuestion(questionNumParameter: Int){
         RequestManager.instance.getQuestion(questionNumber: questionNumParameter) { (status, result) in
             if status{
+                // yeni soru geldiğinde seçilen cevap siliniyor ve kullanıcı durumu değiştiriliyor. soru cevaplayabilir hala geçiyor yani player
                 self.selectedAnswer = nil
                 if self.userStatus == .waitingForNewQuestion{
                     self.userStatus = .player
                 }
                 self.mQuestion = result
                 self.mTableView.reloadData()
+                // soru 10 saniye içinde cevaplanması için timer başlatılıyor.
                 self.startTimer()
             }
         }
@@ -119,20 +133,27 @@ extension QuestionViewController{
         if counter == -1{
             self.counter = 10
             self.timer.invalidate()
+            // süre bittiğinde cevap kontrol ediliyor
             if CompetitionManager.instance.checkAnswer(selectedAnswer: self.selectedAnswer, correctAnswer: self.mQuestion?.dogruCevap, tableView: self.mTableView){
+                //cevap doğruysa kullanıcı durumu yeni soruyu bekleme durumuna geçiyor ve yeni soru isteniyor.
                 self.userStatus = .waitingForNewQuestion
                 self.getNextQuestion()
             }else{
+                //cevap yanlışsa wildCard kullanma durumuna bakılıyor.
                 if alreadyUseWildCard {
+                    //eğer wildcard kullanmışsa kullanıcı durumu izleyici olarak değiştiriliyor. ve yeni soru isteniyor fakat cevaplayamaz çünkü izleyici
                     self.userStatus = .isViewer
                     self.getNextQuestion()
                     
+                    //bilgilendirme mesajı
                     if let topVC = HelperManager.topViewController(){
                         let message = NSLocalizedString("id_wildCard", comment: "")
                          AlertManager.instance.showNegativeMessage(message: message, time: 2, controller: topVC)
                     }
 
                 }else if self.userStatus != .isViewer{
+                    //wild cardı var, kullanmamışsa ve player sa kullanmak isteyip istemediği soruluyor
+                    //kullanıcı durumu wildcard için bekleniyora geçiyor.
                    self.userStatus = .waitingForWildCard
                    self.askUserWildCard()
                 }else{
@@ -153,14 +174,18 @@ extension QuestionViewController{
         guard let ans = cell.mLabelAnswer.text else{
             return
         }
+        
+        // seçilen cevap işleniyor
         self.selectedAnswer = ans
         
+        // seçilen cevap sunucuya gönderiliyor
         RequestManager.instance.sendAnswer(answer: ans) { (status, result) in
             if status{
                 //"cevap gönderildi"
             }
         }
         
+        //seçilen cevabın arka plan rengi değiştiriyor ve kullanıcı durumu değiştiriliyor.
         CompetitionManager.instance.setAnswerBackground(type: .waiting, cell: cell)
         self.userStatus = .waitingForAnswers
 
@@ -171,10 +196,13 @@ extension QuestionViewController{
             return
         }
         
+        // eğer son soruysa wildcard sorma yarışmayı bitir.
         guard soruSira < toplamSoru else{
             self.finishCompetition()
             return
         }
+        
+        
         
         
         let title = "10"
@@ -183,18 +211,22 @@ extension QuestionViewController{
         
         var count = 10
         
+        //10 saniye içinde wildcard kullanması için timer başlatılıyor. Aşağıda
         AlertManager.instance.showAlert(title: title, message: message, type: .alert, buttonString: buttonString, showCancel: true) {
             
+            //eğer kullanırsa kullanma bilgisi işleniyor ve kullanıcı durumu yeni soru için bekleniyora geçiyor.
             self.alreadyUseWildCard = true
             self.userStatus = .waitingForNewQuestion
             self.mUserInformation?.wildCardCount = (self.mUserInformation?.wildCardCount ?? 0) - 1
             
+            //wildcard kullandığı sunucuya gönderiliyor.
             RequestManager.instance.useWildCard(completionHandler: { (status, result) in
                 if status{
                     //"Kart kullanıldı.
                 }
             })
             
+            //bilgilendirme
             let messageToast = NSLocalizedString("id_wcUsed", comment: "")
             AlertManager.instance.showPositiveMessage(message: messageToast, time: 3, controller: self)
     
@@ -210,6 +242,7 @@ extension QuestionViewController{
             count -= 1
             
             if count == -1{
+                //süre bitiminde hala kullanmaışsa izleyici durumuna geçiyor.
                 if self.userStatus == .waitingForWildCard{
                     self.userStatus = .isViewer
                     let messageToast = NSLocalizedString("id_asAviewer", comment: "")
@@ -281,6 +314,7 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // tableview in celllerinde bi problem varsa aşağıdaki bloğu geçemez.
         guard self.isEverythingOkay else{
             return
         }
@@ -289,6 +323,12 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource{
             return
         }
         
+        // kullanıcı durumuna göre işlem yapılıp bilglendiriliyor.
+        //izleyici
+        //yenisoruyu bekliyor
+        //wildcard için bekleniyor
+        //soru cevaplandı doğru cevaplar bekleniyor
+        // oyuncu
         switch self.userStatus {
         case .isViewer:
             

@@ -31,8 +31,10 @@ class RequestManager: NSObject {
         let serviceURL = RestApiURLManager.mGetUserInfoURL
         
         let parameters: [String: AnyObject]? = [
-            "id": "id" as AnyObject
+            "deviceToken": "deviceToken" as AnyObject
         ]
+        
+        //üye bilgilerini almak için unique bir değer olarak device token kullanıldı her telefon sadece 1 üyelik kullanabilir. servis parametre olarak devicetoken alıyor eğer bu devicetoken bir üyeyse üyebilgisi geri  döndürüyor değilse yeni üye oluştur yeni oluşturduğu üye bilgilerini döndürüyor. gibi
         
         AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<UserInformation>) in
@@ -67,6 +69,9 @@ class RequestManager: NSObject {
         let serviceURL = RestApiURLManager.mGetQuestionsURL + "\(questionNumber)"
         
         let parameters: [String: AnyObject]? = [:]
+        
+        //sanki soket server dinleniyormuş gibi QuestionViewController içinde bu servis 10 saniyede 1 çağrıyılıyor.
+        
         
         AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<Question>) in
@@ -103,6 +108,9 @@ class RequestManager: NSObject {
         let parameters: [String: AnyObject]? = [
             "id": "id" as AnyObject
         ]
+        
+        //yarışma bittiğinde sonuçları almak için parametre olarak kullanıcı id yani devicetoken alıyor
+        // ve geriye yarışmacı ne kadar kazandı ve tüm soruları doğru yapan kişileri döndürüyor.
         
         AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<Results>) in
@@ -141,6 +149,9 @@ class RequestManager: NSObject {
             "cevap": answer as AnyObject
         ]
         
+        //paremetre olarak devicetoken ve verilen cevabı alıyor
+        //cevap sunucuya gönderiliyor.
+        
         AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<Answer>) in
                 
@@ -176,6 +187,8 @@ class RequestManager: NSObject {
         let parameters: [String: AnyObject]? = [
             "id": "id" as AnyObject
         ]
+        
+        //wil card kullanıldığınca çalışır ve eğer kullanabiliyorsa servisten true kullanamıyorsa false döner ve kalan hakkı döner.
         
         AlamofireManager.instance.request(serviceURL, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseObject { (response: DataResponse<WildCard>) in
